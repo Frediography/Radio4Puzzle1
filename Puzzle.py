@@ -7,7 +7,6 @@
 # # If you multiply it by 5, it's greater than 100
 
 mylist = []
-mylist2 =[]
 
 def GetList():
 ## It is less than 100
@@ -19,25 +18,27 @@ def GetList():
 def Multipleof3(x):
 # It's one more than a multiple of 3
     if (x-1) % 3 == 0:
-        mylist2.append(x)
+        mylist.remove(x)
 
 def ReverseDigits():
 # If you reverse the digits you get a prime number
+#
 # - lets first take out evens
-    for i in range(20,81,20):
-        for y in range(i, i+10):
-            if mylist2.count(y) > 0:
-                mylist2.remove(y)
+#    for i in range(20,81,20):
+#        for y in range(i, i+10):
+#            if mylist2.count(y) > 0:
+#                mylist2.remove(y)
+#
+    print(mylist)
+    for x in mylist:
+        print(x)
+        b = list(str(x))
+        print(b)
+        a = int(str(b[1]) + str(b[0]))
+        print(a)
 
 # EXECUTE
 GetList()
 for x in mylist:
     Multipleof3(x)
 ReverseDigits()
-print(mylist2)
-print(len(mylist2))
-a = mylist2[0]
-mylist = list(str(a))
-print(mylist)
-a = int(str(mylist[1]) + str(mylist[0]))
-print(a)
