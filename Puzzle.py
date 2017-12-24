@@ -23,21 +23,21 @@ def Multipleof3(x):
 
 def ReverseDigits():
 # If you reverse the digits you get a prime number
-    for i in range (20, 10, 200):
-        print(i)
+# - lets first take out evens
+    for i in range(20,81,20):
+        for y in range(i, i+10):
+            if mylist2.count(y) > 0:
+                mylist2.remove(y)
 
 # EXECUTE
 GetList()
 for x in mylist:
     Multipleof3(x)
 ReverseDigits()
-print(len(mylist2))
-
-print(mylist)
 print(mylist2)
-'''
-if 3 % 2 == 0:
-    print (yes)
-else:
-    print("no")
-'''
+print(len(mylist2))
+a = mylist2[0]
+mylist = list(str(a))
+print(mylist)
+a = mylist[1], mylist[0]
+print(str(a))
