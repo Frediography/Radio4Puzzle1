@@ -39,5 +39,5 @@ print(len(mylist2))
 a = mylist2[0]
 mylist = list(str(a))
 print(mylist)
-a = mylist[1], mylist[0]
-print(str(a))
+a = int(str(mylist[1]) + str(mylist[0]))
+print(a)
