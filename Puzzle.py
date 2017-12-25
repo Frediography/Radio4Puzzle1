@@ -6,7 +6,7 @@ mylist = [] # List we'll use to cut down as we go on
 # Create a function to check for prime numbers
 def PrimeNumber(x):
     if x == 2:
-        return(0)
+        return(1)
     for i in range(2,x):
         if (x % i) == 0:
             return(0)
@@ -60,13 +60,17 @@ def OnePrimeDigit():
 # # If you reverse the digits you get a prime number
 def ReversedPrime():
     debuglist = []
-    for x in range(11,100):
+    for x in range(11, 100, 1):
         b = list(str(x))
+        print(b)
         a = int(str(b[1]) + str(b[0]))
+        print(a)
+        print(PrimeNumber(a))
         if PrimeNumber(a) == 0:
             if x in mylist:
                 mylist.remove(x)
                 debuglist.append(x)
+                print("Removed", x)
     if debug == 1:
         print("Removed the following, that aren't prime numbers when reversed: ")
         print(debuglist)
@@ -129,3 +133,6 @@ SumIsPrime()
 OnePrimeDigit()
 FourFactors()
 Mult5Bigger100()
+
+
+print(PrimeNumber(49))
