@@ -1,107 +1,131 @@
-# # It is less than 100
-# # It's one more than a multiple of 3
-# # Exactly one of the digits is prime
-# # If you reverse the digits you get a prime number
-# It has exactly 4 factors
-# The sum of the digits is prime
-# # If you multiply it by 5, it's greater than 100
-
-mylist = []
-splitdigits = []
-mylist2 = [] #debug list
+# Create variables we'll use throughout:
 debug = 1
+debuglist = []
+mylist = [] # List we'll use to cut down as we go on
 
-def GetList():
-## It is less than 100
-## If you multiply it by 5, it's greater than 100
-    for x in range(1, 100):
-        if x*5 > 100:
-            mylist.append(x)
-
-def Multipleof3():
-# It's one more than a multiple of 3
-    for x in mylist:
-        if (x-1) % 3 != 0:
-            mylist.remove(x)
-            mylist2.append(x)
-    if debug == 1:
-        print("Removed the following, that aren't one more than a multiple of 3: ")
-        print(mylist2)
-
-def SplitDigits():
-#
-# - lets first take out evens
-#    for i in range(20,81,20):
-#        for y in range(i, i+10):
-#            if mylist2.count(y) > 0:
-#                mylist2.remove(y)
-#
-    mylist2 = []
-    for x in mylist:
-        b = list(str(x))
-        c = int(b[0])
-        p = 0
-        if PrimeDigit(c) == 1:
-            p += 1
-        d = int(b[1])
-        if PrimeDigit(d) == 1:
-            p += 1
-        if p != 1:
-            mylist.remove(x)
-            mylist2.append(x)
-    if debug == 1:
-        print("Removed the following, that do not have exactly one prime digit: ")
-        print(mylist2)
-
-def ReversedNumbers():
-    mylist2 = []
-    for x in mylist:
-        b = list(str(x))
-        a = int(str(b[1]) + str(b[0]))
-        if PrimeDigit(a) == 0:
-            mylist.remove(x)
-            mylist2.append(x)
-    if debug == 1:
-        print("Removed the following, that when reversed are not prime numbers: ")
-        print(mylist2)
-
-def SumIsPrime():
-    mylist2 = []
-    for x in mylist:
-        b = list(str(x))
-        c = int(b[0])
-        d = int(b[1])
-        e = c + d
-        if PrimeDigit(e) != 1:
-            mylist.remove(x)
-            mylist2.append(x)
-    if debug == 1:
-        print("Removed the following, that when the digits are added together, do not make a prime number: ")
-        print(mylist2)
-
-def PrimeDigit(num):
-    if num == 2:
+# Create a function to check for prime numbers
+def PrimeNumber(x):
+    if x == 2:
         return(0)
-    for i in range(2,num):
-        if (num % i) == 0:
+    for i in range(2,x):
+        if (x % i) == 0:
             return(0)
         else:
             return(1)
 
-# EXECUTE
-GetList()
-print("New list:")
-print(mylist)
-Multipleof3()
-print("New list:")
-print(mylist)
-ReversedNumbers()
-print("New list:")
-print(mylist)
-SplitDigits()
-print("New list:")
-print(mylist)
+# # It is less than 100
+def LessThan100():
+    for i in range(1, 100):
+        mylist.append(i) # Must start with this because of the way I've written it
+    if debug == 1:
+        print("Added the following numbers below 100: ")
+        print(mylist)
+
+# # It's one more than a multiple of 3
+def OneMoreThanMult3():
+    debuglist = []
+    for i in range(1,100):
+        if int((i - 1)) % 3 != 0:
+            if i in mylist:
+                mylist.remove(i)
+                debuglist.append(i)
+    if debug == 1:
+        print("Removed the following, that aren't one more than a multiple of 3: ")
+        print(debuglist)
+        print("The new list of ", len(mylist), " possibilities is as follows: ")
+        print(mylist)
+
+# # Exactly one of the digits is prime
+def OnePrimeDigit():
+    debuglist = []
+    for i in range(10, 100):
+        a = 0
+        b = list(str(i))
+        c = int(str(b[0]))
+        d = int(str(b[1]))
+        if PrimeNumber(c) == 1:
+            a += 1
+        if PrimeNumber(d) == 1:
+            a += 1
+        if a != 1:
+            if i in mylist:
+                mylist.remove(i)
+                debuglist.append(i)
+    if debug == 1:
+        print("Removed the following, that don't have exactly 1 prime digit ")
+        print(debuglist)
+        print("The new list of ", len(mylist), " possibilities is as follows: ")
+        print(mylist)
+
+# # If you reverse the digits you get a prime number
+def ReversedPrime():
+    debuglist = []
+    for x in range(11,100):
+        b = list(str(x))
+        a = int(str(b[1]) + str(b[0]))
+        if PrimeNumber(a) == 0:
+            if x in mylist:
+                mylist.remove(x)
+                debuglist.append(x)
+    if debug == 1:
+        print("Removed the following, that aren't prime numbers when reversed: ")
+        print(debuglist)
+        print("The new list of ", len(mylist), " possibilities is as follows: ")
+        print(mylist)
+
+# # It has exactly 4 factors
+def FourFactors():
+    debuglist = []
+    for i in range (10, 100):
+        x = 0
+        for j in range (1, i):
+            if i % j == 0:
+                x += 1
+        if x != 4:
+            if x in mylist:
+                mylist.remove(x)
+                debuglist.append(x)
+    if debug == 1:
+        print("Removed the following that don't have four factors: ")
+        print(debuglist)
+        print("The new list of ", len(mylist), " possibilities is as follows: ")
+        print(mylist)
+
+# # The sum of the digits is prime
+def SumIsPrime():
+    debuglist = []
+    for x in range(10,100):
+        b = list(str(x))
+        a = int(str(b[0])) + int(str(b[1]))
+        if PrimeNumber(a) == 0:
+            if x in mylist:
+                mylist.remove(x)
+                debuglist.append(x)
+    if debug == 1:
+        print("Removed the following, that isn't a prime number when the digits are added together: ")
+        print(debuglist)
+        print("The new list of ", len(mylist), " possibilities is as follows: ")
+        print(mylist)
+
+# # If you multiply it by 5, it's greater than 100
+def Mult5Bigger100():
+    debuglist = []
+    for i in range(1, 100):
+        if (i * 5) < 100:
+            if i in mylist:
+                mylist.remove(i)
+                debuglist.append(i)
+    if debug == 1:
+        print("Removed the following, that when multiplied by 5 aren't greater than 100: ")
+        print(debuglist)
+        print("The new list of ", len(mylist), " possibilities is as follows: ")
+        print(mylist)
+
+# Execute functions
+LessThan100() # Need to start with this one
+OneMoreThanMult3()
+ReversedPrime()
 SumIsPrime()
-print("New list:")
-print(mylist)
-print(len(mylist))
+OnePrimeDigit()
+FourFactors()
+Mult5Bigger100()
