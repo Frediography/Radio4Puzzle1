@@ -1,3 +1,10 @@
+#+# # It is less than 100
+#+# # It's one more than a multiple of 3
+#+# Exactly one of the digits is prime
+#+# If you reverse the digits you get a prime number
+#+# It has exactly 4 factors
+#+# The sum of the digits is prime
+#+# # If you multiply it by 5, it's greater than 100
 # Create variables we'll use throughout:
 debug = 1
 debuglist = []
@@ -5,13 +12,14 @@ mylist = [] # List we'll use to cut down as we go on
 
 # Create a function to check for prime numbers
 def PrimeNumber(x):
-    if x == 2:
-        return(1)
-    for i in range(2,x):
-        if (x % i) == 0:
-            return(0)
-        else:
-            return(1)
+    if x > 1:
+        n = x // 2
+        for i in range(2, n + 1):
+            if x % i == 0:
+                return (0)
+        return (1)
+    else:
+        return (0)
 
 # # It is less than 100
 def LessThan100():
@@ -80,15 +88,16 @@ def ReversedPrime():
 # # It has exactly 4 factors
 def FourFactors():
     debuglist = []
-    for i in range (10, 100):
-        x = 0
-        for j in range (1, i):
-            if i % j == 0:
-                x += 1
-        if x != 4:
+    for x in range(10,100):
+        n = x // 2
+        f = 0
+        for i in range(1, n + 1):
+            if x % i == 0:
+                f += 1
+        if f != 4:
             if x in mylist:
-                mylist.remove(x)
                 debuglist.append(x)
+                mylist.remove(x)
     if debug == 1:
         print("Removed the following that don't have four factors: ")
         print(debuglist)
@@ -133,6 +142,3 @@ SumIsPrime()
 OnePrimeDigit()
 FourFactors()
 Mult5Bigger100()
-
-
-print(PrimeNumber(49))
